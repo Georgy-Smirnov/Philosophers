@@ -3,7 +3,7 @@
 t_start_info *put_info_in_start(int argc, char **argv)
 {
 	t_start_info *start;
-	long time;
+	unsigned long time;
 
 	time = get_time();
 	start = (t_start_info *)malloc(sizeof(t_start_info));
@@ -59,6 +59,7 @@ t_philo_info *put_info_in_philo(int count)
 	while (i < count)
 	{
 		philo_info[i].name = i + 1;
+		philo_info[i].life = 1;
 		philo_info[i].left_fork = i;
 		if (i == count - 1)
 			philo_info[i].right_fork = 0;

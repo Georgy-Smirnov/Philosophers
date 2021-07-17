@@ -9,7 +9,7 @@ void	print_struct(t_philosofers *philo)
 	printf("time to die: %d\n", philo[i].start->time_to_die);
 	printf("time to eat: %d\n", philo[i].start->time_to_eat);
 	printf("time to sleap: %d\n", philo[i].start->time_to_sleep);
-	printf("time to to: %d\n", philo[i].start->num_of_times_each_pilo_must_eat);
+	printf("times: %d\n", philo[i].start->num_of_times_each_pilo_must_eat);
 	printf("time start: %ld\n", philo[i].start->start_time);
 	while (i < count)
 	{
@@ -23,15 +23,14 @@ void	print_struct(t_philosofers *philo)
 int	main(int argc, char **argv)
 {
 	t_philosofers *philosophers;
-	int i;
 
-	i = 0;
 	if (argc == 5 || argc == 6)
 	{
 		philosophers = create_struct(argc, argv);
 		if (philosophers == NULL)
 			return (1);
-		print_struct(philosophers);
+		// print_struct(philosophers);
+		// sleep(1);
 		start_philosophers(philosophers);
 	}
 	else

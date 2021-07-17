@@ -59,10 +59,25 @@ int	ft_atoi(const char *str)
 	return (rezult);
 }
 
-long	get_time()
+unsigned long	get_time()
 {
-        struct timeval time;
-        gettimeofday(&time, NULL);
-        return (time.tv_usec / 1000);
+    struct timeval time;
+	unsigned long sec;
+	unsigned long usec;
+    gettimeofday(&time, NULL);
+	sec = time.tv_sec * 1000;
+	usec = time.tv_usec / 1000;
+    return (sec + usec);
 }
 
+int	my_sleep(unsigned long time_to_sleep)
+{
+	unsigned long start_func = get_time();
+	unsigned long finish_func = start_func + time_to_sleep;
+	unsigned long now_time = get_time();
+	while (now_time < finish_func)
+	{
+		now_time = get_time();
+	}
+	return (1);
+}

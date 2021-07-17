@@ -15,7 +15,7 @@ typedef struct s_start_info
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	num_of_times_each_pilo_must_eat;
-	long	start_time;
+	unsigned long	start_time;
 }				t_start_info;
 
 typedef struct	s_philo_info
@@ -23,6 +23,7 @@ typedef struct	s_philo_info
     int name;
     int left_fork;
     int right_fork;
+	int	life;
 }				t_philo_info;
 
 typedef struct s_table
@@ -41,7 +42,8 @@ t_philosofers *create_struct(int argc, char **argv);
 int	start_philosophers(t_philosofers *philosophers);
 
 int	ft_atoi(const char *str);
-long	get_time();
+unsigned long	get_time();
 int	check_argv_is_digit(int argc, char **argv);
+int	my_sleep(unsigned long time_to_sleep);
 
 #endif
