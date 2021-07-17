@@ -11,19 +11,21 @@
 typedef struct s_start_info
 {
 	int	num_of_pilo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
+	unsigned long time_to_die;
+	unsigned long time_to_eat;
+	unsigned long time_to_sleep;
 	int	num_of_times_each_pilo_must_eat;
 	unsigned long	start_time;
 }				t_start_info;
 
 typedef struct	s_philo_info
 {
-    int name;
-    int left_fork;
-    int right_fork;
-	int	life;
+    int				name;
+    int				left_fork;
+    int				right_fork;
+	int				life;
+	unsigned long	time_start_eat;
+	pthread_mutex_t print;
 }				t_philo_info;
 
 typedef struct s_table
@@ -37,6 +39,7 @@ typedef struct s_philosophers
 	t_table *table;
 	t_philo_info *philo_info;
 }				t_philosofers;
+
 
 t_philosofers *create_struct(int argc, char **argv);
 int	start_philosophers(t_philosofers *philosophers);

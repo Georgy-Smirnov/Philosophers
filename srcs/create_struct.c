@@ -15,13 +15,13 @@ t_start_info *put_info_in_start(int argc, char **argv)
 		return (NULL);
 	}
 	start->num_of_pilo = ft_atoi(argv[1]);
-	start->time_to_die = ft_atoi(argv[2]);
-	start->time_to_eat = ft_atoi(argv[3]);
-	start->time_to_sleep = ft_atoi(argv[4]);
+	start->time_to_die = (unsigned long)ft_atoi(argv[2]);
+	start->time_to_eat = (unsigned long)ft_atoi(argv[3]);
+	start->time_to_sleep = (unsigned long)ft_atoi(argv[4]);
 	if (argc == 6)
 		start->num_of_times_each_pilo_must_eat = ft_atoi(argv[5]);
 	else
-		start->num_of_times_each_pilo_must_eat = 0;
+		start->num_of_times_each_pilo_must_eat = -1;
 	start->start_time = time;
 	return (start);
 }
@@ -47,7 +47,7 @@ t_table *put_info_about_table(int count)
 	return (table);
 }
 
-t_philo_info *put_info_in_philo(int count)
+t_philo_info *put_info_in_philo(int count, unsigned long time, int times)
 {
 	t_philo_info *philo_info;
 	int i;
@@ -59,13 +59,16 @@ t_philo_info *put_info_in_philo(int count)
 	while (i < count)
 	{
 		philo_info[i].name = i + 1;
-		philo_info[i].life = 1;
+		philo_info[i].life = times;
+		philo_info[i].time_start_eat = time;
 		philo_info[i].left_fork = i;
 		if (i == count - 1)
 			philo_info[i].right_fork = 0;
 		else
 			philo_info[i].right_fork = i + 1;
 		i++;
+		if (pthread_mutex_init(&(philo_info[i].print), NULL) != 0)
+			return (NULL);
 	}
 	return (philo_info);
 
@@ -86,7 +89,7 @@ t_philosofers *create_struct(int argc, char **argv)
 	table = put_info_about_table(start->num_of_pilo);
 	if (table == NULL)
 		return (NULL);
-	philo_info = put_info_in_philo(start->num_of_pilo);
+	philo_info = put_info_in_philo(start->num_of_pilo, start->start_time, start->num_of_times_each_pilo_must_eat);
 	if (philo_info == NULL)
 		return (NULL);
 	philosopers = (t_philosofers *)malloc(sizeof(t_philosofers) * start->num_of_pilo);
