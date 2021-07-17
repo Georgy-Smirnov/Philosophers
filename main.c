@@ -1,38 +1,38 @@
 #include "philo.h"
 
-void	free_philosophers(t_philosofers *philosophers)
+void	free_philosophers(t_all *all)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
-	count = philosophers->start->num_of_pilo;
-	free(philosophers->philo_info);
+	count = all->count_philosophers;
+	pthread_mutex_destroy(all->philo[0].print_mutex);
 	while (i < count)
 	{
-		pthread_mutex_destroy(philosophers[i].table->forks);
+		pthread_mutex_destroy(all->philo[i].left_fork);
 		i++;
 	}
-	free(philosophers->table->forks);
-	free(philosophers->table);
-	free(philosophers);
+	free(all->philo[0].print_mutex);
+	free(all->philo[0].left_fork);
+	free(all->philo);
+	free(all);
 }
 
 int	main(int argc, char **argv)
 {
-	t_philosofers *philosophers;
+	t_all	*all;
 
 	if (argc == 5 || argc == 6)
 	{
-		philosophers = create_struct(argc, argv);
-		if (philosophers == NULL)
+		all = create_struct(argc, argv);
+		if (all == NULL)
 			return (1);
-		if (start_philosophers(philosophers) != 0)
-			free_philosophers(philosophers);
-		else
+		if (start_philosophers(all) != 0)
 			return (1);
+		free_philosophers(all);
 	}
 	else
-		write(1, "Wrong arguments!\n", 17);
+		printf("Wrong arguments!\n");
 	return (0);
 }

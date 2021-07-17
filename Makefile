@@ -11,12 +11,10 @@ _END		=	\e[0m
 
 #==================================>FILES<=====================================#
 
-SRC			=	main.c \
+SRCS			=	main.c \
 				srcs/create_struct.c \
 				srcs/start_philosophers.c \
 				srcs/utils.c
-
-SRCS		=	$(SRC)
 
 #===============================>COMPILATIONS<=================================#
 

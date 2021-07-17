@@ -1,8 +1,10 @@
 #include "philo.h"
 
-int check_str_is_pos_digit(char *str)
+int	check_str_is_pos_digit(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
@@ -59,25 +61,29 @@ int	ft_atoi(const char *str)
 	return (rezult);
 }
 
-unsigned long	get_time()
+unsigned long	get_time(void)
 {
-    struct timeval time;
-	unsigned long sec;
-	unsigned long usec;
-    gettimeofday(&time, NULL);
+	struct timeval	time;
+	unsigned long	sec;
+	unsigned long	usec;
+
+	gettimeofday(&time, NULL);
 	sec = time.tv_sec * 1000;
 	usec = time.tv_usec / 1000;
-    return (sec + usec);
+	return (sec + usec);
 }
 
 int	my_sleep(unsigned long time_to_sleep)
 {
-	unsigned long start_func = get_time();
-	unsigned long finish_func = start_func + time_to_sleep;
-	unsigned long now_time = get_time();
-	while (now_time < finish_func)
+	unsigned long	start_func;
+	unsigned long	now_time;
+
+	start_func = get_time();
+	now_time = get_time();
+	while (now_time < start_func + time_to_sleep)
 	{
 		now_time = get_time();
+		usleep(100);
 	}
 	return (1);
 }
