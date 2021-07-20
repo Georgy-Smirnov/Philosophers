@@ -7,7 +7,7 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <semaphore.h>
-#include <signal.h>
+# include <signal.h>
 
 # define FORKS "forks"
 # define PRINT "print"
@@ -47,5 +47,7 @@ int				ft_atoi(const char *str);
 unsigned long	get_time(void);
 int				check_argv_is_digit(int argc, char **argv);
 int				my_sleep(unsigned long time_to_sleep);
+int				get_forks(t_philosophers *philo);
+int				philo_actions(t_philosophers *philo);
 
 #endif

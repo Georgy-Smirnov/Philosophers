@@ -14,6 +14,7 @@ _END		=	\e[0m
 SRCS			=	main.c \
 				srcs/create_struct.c \
 				srcs/start_philosophers.c \
+				srcs/philo_actions.c \
 				srcs/utils.c
 
 #===============================>COMPILATIONS<=================================#

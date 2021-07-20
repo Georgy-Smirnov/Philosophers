@@ -85,5 +85,3 @@ t_all	*create_struct(int argc, char **argv)
 	free(start);
 	return (all);
 }
-
-
